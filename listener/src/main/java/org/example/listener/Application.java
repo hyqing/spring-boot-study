@@ -23,7 +23,7 @@ public class Application {
 //        context.close();
 
         /*
-         * 2.直接在MyApplicationListener类上加@Commponent注解，纳入Spring容器管理
+         * 2.直接在MyApplicationListener类上加@Component注解，纳入Spring容器管理
          * 3.在配置文件中配置:
          * 源码分析：进入DelegatingApplicationListener类中的onApplicationEvent方法，
          * getListeners是获取当前项目中的所有事件监听器。
