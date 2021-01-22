@@ -29,6 +29,35 @@
 
 #### @Async自定义线程池模式
 
+从Spring3开始提供了@Async注解，该注解可以被标注在方法上，以便异步调用该方法。
+
+调用者将在调用时立即返回，方法的实际执行将提交给Spring TaskExecutor的任务中，该方法由TaskExecutor中的线程来执行
+
+
+**Spring 已经实现的线程池：**
+1.SimpleAsyncTaskExecutor:不是真正的线程池，这个类不重用线程，默认每次调用都会创建一个新的线程
+2.SyncTaskExecutor：这个类没有实现异步调用，只是一个同步操作。只适用于不需要多线程的地方
+3.ConcurrentTaskExecutor
+4.SimpleThreadPoolTaskExecutor：是Quartz的SimpleThreadPool的类。线程池同时被quartz和非quartz使用，才需要使用此类。
+5.ThreadPoolTaskExecutor：最常使用，推荐。其实质是对java.util.concurrent.ThreadPoolExecutor的包装。
+
+**用法**
+
+* 重新实现接口AsyncConfigurer
+* 继承AsyncConfigurerSupport
+* 配置自定义的TaskExecutor替代内置的任务执行器
+
+@Async的默认调用规则，会优先查询源码中实现AsyncConfigure这个接口的类，实现这个接口的类为AsyncConfigurerSupport。
+但默认配置的线程池和异步处理方法均为空，所以，无论是继承或者重新实现接口，都需指定一个线程。
+
+重新实现public Executor getAsyncExecutor()方法——测试的时候不用也是可以的
+TO DO：翻一下源码看看 getAsyncExecutor()方法的作用
+
+@Async注解，使用系统默认或者自定义的线程池（代替默认线程池）。可在项目中设置多个线程，在异步调用时，指明需要调用
+的线程池名称，如@Async("newTask")。
+
+**注意点**
+* 自定义的线程池，需要声明为Bean
 
 
 #### @Async异步处理机制

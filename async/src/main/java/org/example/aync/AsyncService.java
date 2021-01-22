@@ -26,7 +26,7 @@ public class AsyncService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("testAsync invoked");
+        logger.info("testAsync invoked - " + Thread.currentThread().getName());
     }
 
     //有返回值的调用
