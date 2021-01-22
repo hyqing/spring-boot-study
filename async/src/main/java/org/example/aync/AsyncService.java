@@ -1,8 +1,10 @@
 package org.example.aync;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,8 +13,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class AsyncService {
 
+    //无返回值调用
     @Async
-    public void testAsync() {
+    public void withoutReturn() {
         try {
             TimeUnit.MINUTES.sleep(1);
         } catch (InterruptedException e) {
@@ -20,4 +23,18 @@ public class AsyncService {
         }
         System.out.println("testAsync invoked");
     }
+
+    //有返回值的调用
+    @Async
+    public Future<String> withReturn() {
+        System.out.println("Execute method asynchronously - " + Thread.currentThread().getName());
+        try {
+            TimeUnit.MINUTES.sleep(1);
+            return new AsyncResult<String>("hello world !!!!");
+        } catch (InterruptedException e) {
+            //
+        }
+        return null;
+    }
+
 }
