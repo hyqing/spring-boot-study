@@ -31,8 +31,8 @@ public class Application {
          */
         ConfigurableApplicationContext context = SpringApplication.run(Application.class);
         //发布事件
-        context.publishEvent(new MyApplicationEvent(new Object()));
-        context.close();
+//        context.publishEvent(new MyApplicationEvent(new Object()));
+//        context.close();
 
 
     }
