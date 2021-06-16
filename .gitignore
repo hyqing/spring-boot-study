@@ -1,10 +1,1 @@
 /.idea/
-/annotation/annotation.iml
-/transcation-jpa/transcation-jpa.iml
-/transcation-mybatis/transcation-mybatis.iml
-/transcation-jpa/target/
-/transcation-mybatis/target/
-/annotation/target/
-/listener/listener.iml
-/blank/blank.iml
-/async/async.iml
